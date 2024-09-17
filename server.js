@@ -12,6 +12,15 @@ require('dotenv').config();
 // Connect to database
 connectDB();
 
+
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://your-api-domain.com;"
+  );
+  next();
+});
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
