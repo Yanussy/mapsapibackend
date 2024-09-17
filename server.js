@@ -22,7 +22,9 @@ app.use((req, res, next) => {
   next();
 });
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*' // Replace with your frontend's URL for security in production
+}));
 app.use(bodyParser.json());
 
 // Routes
