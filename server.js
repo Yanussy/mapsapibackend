@@ -14,6 +14,9 @@ connectDB();
 
 app.use(helmet());
 
+app.get('/', (req, res) => {
+  res.send('Backend is running.');
+});
 
 app.use(
   helmet.contentSecurityPolicy({
