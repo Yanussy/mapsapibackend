@@ -3,7 +3,7 @@ const router = express.Router();
 const { getUserByEmail } = require("../controllers/userController");
 // Apply if you have authentication
 
-router.get("/friends", getUserByEmail);
+router.get("/:email", getUserByEmail);
 const User = require("../models/User"); // Assuming your user model is User
 
 router.get('/friends', async (req, res) => {
