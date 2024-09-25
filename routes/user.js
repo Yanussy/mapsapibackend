@@ -8,16 +8,15 @@ router.get("/:email", getUserByEmail);
 // Assuming your user model is User
 
 router.get("/friends", async (req, res) => {
+  getUserByEmail;
+
   try {
     // Log to ensure the route is being hit
     console.log("GET /friends called");
 
-    const users = await User.find({}, "email"); // Fetch only the email field
-    if (!users || users.length === 0) {
-      console.log("No users found"); // Log if no users are found
-      return res.status(404).json({ message: "No users found" });
-    }
-
+    const users = await User.find({ _id: { $ne: req.user.id } }).select([
+      "email",
+    ]); // Fetch only the email field
     console.log("Users found:", users); // Log the found users
     const emails = users.map((user) => user.email);
     res.json(emails); // Send the array of emails as a JSON response
