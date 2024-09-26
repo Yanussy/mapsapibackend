@@ -5,7 +5,7 @@ const { getUserByEmail } = require("../controllers/userController");
 // Apply if you have authentication
 
 router.get("/:email", getUserByEmail);
-const User = require("../models/User"); // Assuming your user model is User
+ // Assuming your user model is User
 router.get('/friends', async (req, res) => {
   try {
     // Fetch all user data from the database

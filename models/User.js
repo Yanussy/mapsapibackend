@@ -7,8 +7,8 @@ const UserSchema = new mongoose.Schema({
   location: {
     latitude: { type: Number },
     longitude: { type: Number },
-    following: [{ type: Schema.ObjectId, ref: 'User' }],
-  followers: [{ type: Schema.ObjectId, ref: 'User' }],
+    following: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+  followers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   },});
 
 module.exports = mongoose.model('User', UserSchema);
