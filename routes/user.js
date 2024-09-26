@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const User = require("../models/User");
 const { getUserByEmail } = require("../controllers/userController");
 // Apply if you have authentication
 
@@ -29,7 +30,7 @@ router.post("/location", async (req, res) => {
     );
 
     res.json({ success: true, user });
-    console.log( {email}, {location})
+    console.log({ email }, { location });
   } catch (error) {
     console.error("Error saving location:", error);
     res.status(500).json({ success: false, message: "Internal Server Error" });
