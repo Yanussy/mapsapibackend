@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { login } = require('../controllers/authController');
 const User = require("../models/User");
+const User = require('../models/User');
 
 router.get("/friends", async (req, res, next) => {
   let emailParam = req.query.email;
@@ -39,6 +40,30 @@ router.get("/friends", async (req, res, next) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+
+router.post('/followers', async (req, res)=> {
+  const {email,friendEmail} = req.body;
+
+try{
+  const user = await User.findOne({email});
+  const friend = await User.findOne({friendEmail});
+
+  if (!user || !friend) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  user.following.push(friend._id);
+
+  friend.followers.push(user._id);
+
+  console.log(user.following);
+
+}catch(error){
+console.error("error getting user and friend from frontend", error);
+res.status(500).json({message:"server error"})
+}
+})
 
 router.post('/login', login);
 
