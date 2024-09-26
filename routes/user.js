@@ -5,19 +5,18 @@ const { getUserByEmail } = require("../controllers/userController");
 
 router.get("/:email", getUserByEmail);
 const User = require("../models/User"); // Assuming your user model is User
-
 router.get('/friends', async (req, res) => {
   try {
-    // Fetch all user emails from the database
-    const users = await User.find({}, 'email'); // Fetch only the email field
-    const emails = users.map(user => user.email);
-    
-    res.json(emails); // Send the array of emails as a JSON response
+    // Fetch all user data from the database
+    const users = await User.find(); // Fetch all fields of all users
+
+    res.json(users); // Send the array of user objects as a JSON response
   } catch (error) {
-    console.error('Error fetching emails:', error);
+    console.error('Error fetching users:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 // Route to update user's location
 router.post("/location", async (req, res) => {
   const { email, location } = req.body;
