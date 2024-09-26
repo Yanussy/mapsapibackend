@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { login } = require('../controllers/authController');
 const User = require("../models/User");
-const User = require('../models/User');
+
 
 router.get("/friends", async (req, res, next) => {
   let emailParam = req.query.email;
